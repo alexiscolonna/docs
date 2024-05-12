@@ -85,6 +85,44 @@
         }
       }
     },
+    "/tables/imports/{import_id}": {
+      "get": {
+        "description": "Retrieves information aboiyt an import",
+        "parameters": [
+          {
+            "name": "import_id",
+            "in": "path",
+            "description": "ID of the import",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Import found",
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/Import"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/tables/{table-api-name}/records/ingest": {
     "post": {
     "description": "Imports data into Qobra",
@@ -163,6 +201,22 @@
           "tag": {
             "description": "Tag to specify the type",
             "type": "string"
+          }
+        }
+      },
+      "Import": {
+        "required": [
+          "import_id"
+        ],
+        "type": "object",
+        "properties": {
+          "import_id": {
+            "description": "the id of the import you want to retrieve data of",
+            "type": "string"
+          },
+          "data_import": {
+            "description": "The data about the import",
+            "type": "object"
           }
         }
       },
