@@ -7,11 +7,11 @@
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#4946ff",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "light": "#4946ff",
+    "dark": "#4946ff",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#4946ff",
+      "to": "#4946ff"
     }
   },
   "topbarCtaButton": {
