@@ -2,8 +2,8 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Technical Documentation",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "https://assets-global.website-files.com/5f437eac0ee32742dbd60118/61e82ac73225857c4289c37e_logo-full-white.svg",
+    "light": "https://assets-global.website-files.com/5f437eac0ee32742dbd60118/61e82ac73225857c4289c37e_logo-full-white.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
