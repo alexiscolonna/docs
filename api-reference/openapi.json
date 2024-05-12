@@ -103,7 +103,11 @@
           "200": {
             "description": "Import found",
             "content": {
-                
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/Import"
+                }
+              }
             }
           },
           "400": {
