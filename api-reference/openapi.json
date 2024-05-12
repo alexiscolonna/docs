@@ -113,18 +113,25 @@
             "name": "limit",
             "in": "query",
             "description": "The maximum number of results to return",
+            "required": false,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "default": 200,
+              "minimum": 0,
+              "maximum":200
             }
           },
           {
             "name": "offset",
             "in": "query",
             "description": "Position of the first value to return",
+            "required": false,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "default": 0,
+              "minimum": 0
             }
           }
         ],
