@@ -124,10 +124,7 @@
         "content": {
             "application/json": {
             "schema": {
-                "type": "array",
-                "items": {
-                "$ref": "#/components/schemas/Plant"
-                }
+                "$ref": "#/components/schemas/ImportResponse"
             }
             }
         }
@@ -161,6 +158,22 @@
           "tag": {
             "description": "Tag to specify the type",
             "type": "string"
+          }
+        }
+      },
+      "ImportResponse": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "import_id": {
+            "description": "unique identifier of the import you created",
+            "type": "string"
+          },
+          "objects_imported": {
+            "description": "number of records your request contained",
+            "type": "integer"
           }
         }
       },
