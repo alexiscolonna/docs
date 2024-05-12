@@ -19,83 +19,6 @@
     }
   ],
   "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/tables/{table-api-name}/records": {
       "get": {
         "description": "Retrieves table records data",
@@ -138,7 +61,16 @@
         "responses": {
           "200": {
             "description": "Table found",
-            "content": {}
+            "content": {
+                "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plant"
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "unexpected error",
@@ -152,7 +84,67 @@
           }
         }
       }
+    },
+    "/tables/{table-api-name}/records/ingest": {
+    "post": {
+    "description": "Imports data into Qobra",
+    "parameters": [
+        {
+        "name": "table-api-name",
+        "in": "path",
+        "description": "ID of table",
+        "required": true,
+        "schema": {
+            "type": "string"
+        }
+        },
+        {
+        "name": "all",
+        "in": "query",
+        "description": "If the parameter is true, the request will delete all the data table content, before doing the import",
+        "required": false,
+        "schema": {
+            "type": "boolean"
+        }
+        },
+        {
+        "name": "debounce",
+        "in": "query",
+        "description": "Number of seconds we wait before launching imports. This query parameter is used in conjunction with the all query parameter. If you want to push a large number of records, but delete the data tables records before, this debounce system will enable you to split this large amount in several requests. ",
+        "required": false,
+        "schema": {
+            "type": "integer",
+            "format": "int32"
+        }
+        }
+    ],
+    "responses": {
+        "200": {
+        "description": "Table found",
+        "content": {
+            "application/json": {
+            "schema": {
+                "type": "array",
+                "items": {
+                "$ref": "#/components/schemas/Plant"
+                }
+            }
+            }
+        }
+        },
+        "400": {
+        "description": "unexpected error",
+        "content": {
+            "application/json": {
+            "schema": {
+                "$ref": "#/components/schemas/Error"
+            }
+            }
+        }
+        }
     }
+    }
+}
   },
   "components": {
     "schemas": {
