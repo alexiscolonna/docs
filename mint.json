@@ -19,12 +19,6 @@
     "name": "Back to Qobra",
     "url": "https://app.qobra.co"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
   "modeToggle": {
   "default": "light",
   "isHidden": true
