@@ -4,7 +4,7 @@
     "dark": "https://assets-global.website-files.com/5f437eac0ee32742dbd60118/61e82ac73225857c4289c37e_logo-full-white.svg",
     "light": "https://assets-global.website-files.com/5f437eac0ee32742dbd60118/61e82ac73225857c4289c37e_logo-full-white.svg"
   },
-  "favicon": "/qobra_favicon.png",
+  "favicon": "qobra_favicon.png",
   "openapi": "api-reference/openapi.json",
   "colors": {
     "primary": "#4946ff",
