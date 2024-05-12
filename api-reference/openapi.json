@@ -217,7 +217,7 @@
           },
           "data_import": {
             "description": "The data about the import",
-            "type": "object"
+            "type": "string"
           }
         }
       },
