@@ -87,7 +87,7 @@
     },
     "/tables/imports/{import_id}": {
       "get": {
-        "description": "Retrieves information aboiyt an import",
+        "description": "Retrieves information about an import",
         "parameters": [
           {
             "name": "import_id",
