@@ -1,5 +1,4 @@
 {
-  
   "openapi": "3.0.1",
   "info": {
     "title": "Qobra API",
@@ -43,7 +42,7 @@
               "format": "int32",
               "default": 200,
               "minimum": 0,
-              "maximum":200
+              "maximum": 200
             }
           },
           {
@@ -63,11 +62,24 @@
           "200": {
             "description": "Table found",
             "content": {
-                "application/json": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Plant"
+                    "required": [
+                      "name"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "description": "The name of the plant",
+                        "type": "string"
+                      },
+                      "tag": {
+                        "description": "Tag to specify the type",
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               }
@@ -78,7 +90,20 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -104,9 +129,22 @@
           "200": {
             "description": "Import found",
             "content": {
-                "application/json": {
+              "application/json": {
                 "schema": {
-                    "$ref": "#/components/schemas/Import"
+                  "required": [
+                    "import_id"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "import_id": {
+                      "description": "the id of the import you want to retrieve data of",
+                      "type": "string"
+                    },
+                    "data_import": {
+                      "description": "The data about the import",
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -116,7 +154,20 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -125,67 +176,88 @@
       }
     },
     "/tables/{table-api-name}/records/ingest": {
-    "post": {
-    "description": "Imports data into Qobra",
-    "parameters": [
-        {
-        "name": "table-api-name",
-        "in": "path",
-        "description": "ID of table",
-        "required": true,
-        "schema": {
-            "type": "string"
-        }
-        },
-        {
-        "name": "all",
-        "in": "query",
-        "description": "If the parameter is true, the request will delete all the data table content, before doing the import",
-        "required": false,
-        "schema": {
-            "type": "boolean"
-        }
-        },
-        {
-        "name": "debounce",
-        "in": "query",
-        "description": "Number of seconds we wait before launching imports. This query parameter is used in conjunction with the all query parameter. If you want to push a large number of records, but delete the data tables records before, this debounce system will enable you to split this large amount in several requests. ",
-        "required": false,
-        "schema": {
-            "type": "integer",
-            "format": "int32"
-        }
-        }
-    ],
-    "requestBody" : {
-        "description":"The body is a json list of records you want to push to Qobra.",
-        "required":true
-
-    },
-    "responses": {
-        "200": {
-        "description": "Table found",
-        "content": {
-            "application/json": {
+      "post": {
+        "description": "Imports data into Qobra",
+        "parameters": [
+          {
+            "name": "table-api-name",
+            "in": "path",
+            "description": "ID of table",
+            "required": true,
             "schema": {
-                "$ref": "#/components/schemas/ImportResponse"
+              "type": "string"
             }
-            }
-        }
-        },
-        "400": {
-        "description": "unexpected error",
-        "content": {
-            "application/json": {
+          },
+          {
+            "name": "all",
+            "in": "query",
+            "description": "If the parameter is true, the request will delete all the data table content, before doing the import",
+            "required": false,
             "schema": {
-                "$ref": "#/components/schemas/Error"
+              "type": "boolean"
             }
+          },
+          {
+            "name": "debounce",
+            "in": "query",
+            "description": "Number of seconds we wait before launching imports. This query parameter is used in conjunction with the all query parameter. If you want to push a large number of records, but delete the data tables records before, this debounce system will enable you to split this large amount in several requests. ",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Table found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "name"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "import_id": {
+                      "description": "unique identifier of the import you created",
+                      "type": "string"
+                    },
+                    "objects_imported": {
+                      "description": "number of records your request contained",
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
-        }
+      }
     }
-    }
-
   },
   "components": {
     "schemas": {
@@ -240,7 +312,20 @@
       "NewPlant": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/Plant"
+            "required": [
+              "name"
+            ],
+            "type": "object",
+            "properties": {
+              "name": {
+                "description": "The name of the plant",
+                "type": "string"
+              },
+              "tag": {
+                "description": "Tag to specify the type",
+                "type": "string"
+              }
+            }
           },
           {
             "required": [
@@ -282,6 +367,4 @@
       }
     }
   }
-}
-
 }
