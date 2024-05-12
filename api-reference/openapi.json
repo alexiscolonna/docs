@@ -118,6 +118,11 @@
         }
         }
     ],
+    "requestBody" : {
+        "description":"The body is a json list of records you want to push to Qobra.",
+        "required":true
+
+    },
     "responses": {
         "200": {
         "description": "Table found",
